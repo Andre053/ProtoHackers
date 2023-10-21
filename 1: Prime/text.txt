@@ -1,0 +1,491 @@
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56682
+>Session started on worker 1<
+Received request : {"number":851351,"method":"isPrime"}
+851351 is prime : true
+Received request : {"number":415200,"method":"isPrime"}
+415200 is prime : false
+Received request : {"number":3,"method":"isPrime"}
+3 is prime : true
+Received request : me"}
+Received request : {"number":583016,"method":"isPrime"}
+583016 is prime : false
+Received request : {"method":"isPrime","number":4}
+4 is prime : false
+Received request : me"}
+Received request : {"method":"isPrime","number":-4}
+Error in checkPrime for -4 : Number is invalidReceived request : e"}
+Received request : {"method":"isPrime","number":-2}
+Error in checkPrime for -2 : Number is invalidReceived request : e"}
+Received request : {"method":"isPrime","number":-3}
+Error in checkPrime for -3 : Number is invalidReceived request : e"}
+Received request : {"number":2,"method":"isPrime"}
+2 is prime : true
+Received request : 
+Received request : e"}
+Received request : {"number":1,"method":"isPrime"}
+Error in checkPrime for 1 : Number is invalidReceived request : 
+Received request : e"}
+Received request : {"number":465007,"method":"isPrime"}
+465007 is prime : true
+Received request : {"number":468199,"method":"isPrime"}
+468199 is prime : true
+Received request : {"number":927463,"method":"isPrime"}
+927463 is prime : false
+Received request : {"number":824563,"method":"isPrime"}
+824563 is prime : true
+Received request : {"method":"isPrime","number":35671}
+35671 is prime : true
+Received request : 
+Received request : {"method":"isPrime","number":548039}
+548039 is prime : true
+Received request : {"method":"isPrime","number":0}
+Error in checkPrime for 0 : Number is invalidReceived request : 039}
+Received request : {"method":"isPrime","number":541460}
+541460 is prime : false
+Received request : {"number":561554,"method":"isPrime"}
+561554 is prime : false
+Received request : {"number":942509,"method":"isPrime"}
+942509 is prime : true
+Received request : {"method":"isPrime","number":14282}
+14282 is prime : false
+Received request : 
+Received request : {"method":"isPrime","number":-1}
+Error in checkPrime for -1 : Number is invalidReceived request : 2}
+Received request : 
+Received request : {"method":"isPrime","number":13049}
+13049 is prime : true
+Received request : 
+Received request : {"method":"isPrime","number":670208}
+670208 is prime : false
+Received request : {"method":"isPrime","number":130014}
+130014 is prime : false
+>Closing connection<
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56694
+>Session started on worker 2<
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56696
+>Session started on worker 3<
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56698
+>Session started on worker 4<
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56700
+>Session started on worker 5<
+### Accepted a connection ###
+Connection details:
+        Network Address : 206.189.113.124:56702
+>Session started on worker 1<
+Received request : {"number":50493038,"method":"isPrime"}
+50493038 is prime : false
+Received request : {"number":88470209,"method":"isPrime"}
+Received request : {"number":12116330,"method":"isPrime"}
+Received request : {"method":"isPrime","number":17782691}
+12116330 is prime : false
+Received request : {"method":"isPrime","number":84099494}
+84099494 is prime : false
+Received request : {"method":"isPrime","number":21878059}
+21878059 is prime : false
+Received request : {"method":"isPrime","number":73714170}
+73714170 is prime : false
+Received request : {"method":"isPrime","number":18017559}
+18017559 is prime : false
+Received request : {"method":"isPrime","number":99955103}
+Received request : {"method":"isPrime","number":38692487}
+Received request : {"number":23984171,"method":"isPrime"}
+17782691 is prime : true
+Received request : {"number":36916333,"method":"isPrime"}
+36916333 is prime : false
+Received request : {"number":88062757,"method":"isPrime"}
+23984171 is prime : true
+Received request : {"method":"isPrime","number":59821579}
+38692487 is prime : true
+Received request : {"number":30418721,"method":"isPrime"}
+88470209 is prime : true
+Received request : {"number":88471413,"method":"isPrime"}
+88471413 is prime : false
+Received request : {"method":"isPrime","number":50766295}
+50766295 is prime : false
+Received request : {"number":20444911,"method":"isPrime"}
+30418721 is prime : true
+Received request : {"number":36133662,"method":"isPrime"}
+36133662 is prime : false
+Received request : {"number":19570693,"method":"isPrime"}
+59821579 is prime : true
+Received request : {"number":166540,"method":"isPrime"}
+166540 is prime : false
+Received request : {"method":"isPrime","number":51294401}
+20444911 is prime : true
+Received request : {"method":"isPrime","number":7115841}
+7115841 is prime : false
+Received request : {"method":"isPrime","number":31459412}
+31459412 is prime : false
+Received request : {"method":"isPrime","number":56759443}
+56759443 is prime : false
+Received request : {"method":"isPrime","number":4189951}
+19570693 is prime : true
+Received request : {"number":17168231,"method":"isPrime"}
+4189951 is prime : true
+Received request : {"method":"isPrime","number":43766123}
+99955103 is prime : true
+Received request : {"number":74198281,"method":"isPrime"}
+17168232 is prime : true
+Received request : {"number":72183743,"method":"isPrime"}
+88062757 is prime : true
+Received request : {"number":62800411,"method":"isPrime"}
+51294401 is prime : true
+Received request : {"number":93583687,"method":"isPrime"}
+43766123 is prime : true
+Received request : {"method":"isPrime","number":87482960}
+87482960 is prime : false
+Received request : {"method":"isPrime","number":26865547}
+26865547 is prime : true
+Received request : {"method":"isPrime","number":71374909}
+74198281 is prime : true
+Received request : {"number":11508447,"method":"isPrime"}
+11508447 is prime : false
+Received request : {"method":"isPrime","number":81112705}
+81112705 is prime : false
+Received request : {"number":86939933,"method":"isPrime"}
+62800411 is prime : true
+Received request : {"method":"isPrime","number":38382174}
+38382174 is prime : false
+Received request : {"number":78259481,"method":"isPrime"}
+72183743 is prime : true
+Received request : {"number":37597159,"method":"isPrime"}
+37597159 is prime : true
+Received request : {"method":"isPrime","number":95134313}
+93583687 is prime : true
+Received request : {"method":"isPrime","number":95967631}
+71374909 is prime : true
+Received request : {"method":"isPrime","number":17501773}
+78259481 is prime : true
+Received request : {"method":"isPrime","number":82467173}
+17501773 is prime : true
+Received request : {"method":"isPrime","number":49291841}
+86939933 is prime : true
+Received request : {"number":76571535,"method":"isPrime"}
+76571535 is prime : false
+Received request : {"number":46067335,"method":"isPrime"}
+46067335 is prime : false
+Received request : {"method":"isPrime","number":26456259}
+26456259 is prime : false
+Received request : {"number":95072141,"method":"isPrime"}
+49291841 is prime : true
+Received request : {"number":6487124,"method":"isPrime"}
+6487124 is prime : false
+Received request : {"method":"isPrime","number":59881649}
+95134313 is prime : true
+Received request : {"method":"isPrime","number":19310983}
+95967631 is prime : true
+Received request : {"method":"isPrime","number":50904407}
+19310983 is prime : true
+Received request : {"number":53567884,"method":"isPrime"}
+53567884 is prime : false
+Received request : {"number":61642013,"method":"isPrime"}
+82467173 is prime : true
+Received request : {"number":70265171,"method":"isPrime"}
+95072141 is prime : true
+Received request : {"method":"isPrime","number":64274219}
+59881649 is prime : true
+Received request : {"number":68036406,"method":"isPrime"}
+68036406 is prime : false
+Received request : {"method":"isPrime","number":96126841}
+50904407 is prime : true
+Received request : {"number":31946374,"method":"isPrime"}
+31946374 is prime : false
+Received request : {"number":39206873,"method":"isPrime"}
+61642013 is prime : true
+Received request : {"method":"isPrime","number":68188351}
+68188351 is prime : false
+Received request : {"number":97893343,"method":"isPrime"}
+70265171 is prime : true
+Received request : {"method":"isPrime","number":35149341}
+35149341 is prime : false
+Received request : {"number":38237077,"method":"isPrime"}
+39206873 is prime : true
+Received request : {"number":1282079,"method":"isPrime"}
+1282079 is prime : true
+Received request : {"method":"isPrime","number":47327233}
+47327233 is prime : false
+Received request : {"number":28160713,"method":"isPrime"}
+28160713 is prime : false
+Received request : {"method":"isPrime","number":44708511}
+44708511 is prime : false
+Received request : {"method":"isPrime","number":21376729}
+21376729 is prime : false
+Received request : {"number":92303352,"method":"isPrime"}
+92303352 is prime : false
+Received request : {"number":46614103,"method":"isPrime"}
+64274219 is prime : true
+Received request : {"method":"isPrime","number":81776167}
+81776167 is prime : false
+Received request : {"number":16766671,"method":"isPrime"}
+16766671 is prime : true
+Received request : {"number":1195021,"method":"isPrime"}
+1195021 is prime : true
+Received request : {"number":91889079,"method":"isPrime"}
+91889079 is prime : false
+Received request : {"method":"isPrime","number":38557182}
+38557182 is prime : false
+Received request : {"number":84597772,"method":"isPrime"}
+84597772 is prime : false
+Received request : {"method":"isPrime","number":64509502}
+64509502 is prime : false
+Received request : {"number":6079732,"method":"isPrime"}
+6079732 is prime : false
+Received request : {"method":"isPrime","number":46319813}
+38237077 is prime : true
+Received request : {"method":"isPrime","number":76747603}
+96126841 is prime : true
+Received request : {"number":97377191,"method":"isPrime"}
+46614103 is prime : true
+Received request : {"method":"isPrime","number":58558904}
+58558904 is prime : false
+Received request : {"number":29502797,"method":"isPrime"}
+46319813 is prime : true
+Received request : {"method":"isPrime","number":12598562}
+12598562 is prime : false
+Received request : {"method":"isPrime","number":81162921}
+81162921 is prime : false
+Received request : 729119,"method":"isPrime"}
+Received request : {"number":58663347,"method":"isPrime"}
+58663347 is prime : false
+Received request : {"method":"isPrime","number":62306501}
+29502797 is prime : true
+Received request : {"method":"isPrime","number":25435681}
+97893343 is prime : true
+Received request : {"method":"isPrime","number":34837889}
+25435681 is prime : true
+Received request : {"number":61306951,"method":"isPrime"}
+76747603 is prime : true
+Received request : {"method":"isPrime","number":48523667}
+34837889 is prime : true
+Received request : {"method":"isPrime","number":2742167}
+2742167 is prime : false
+Received request : {"method":"isPrime","number":18336719}
+18336719 is prime : false
+Received request : {"method":"isPrime","number":37929113}
+62306501 is prime : true
+Received request : {"number":62066652,"method":"isPrime"}
+62066652 is prime : false
+Received request : {"number":93066221,"method":"isPrime"}
+97377191 is prime : true
+Received request : {"number":9532732,"method":"isPrime"}
+9532732 is prime : false
+Received request : {"number":44440721,"method":"isPrime"}
+44440721 is prime : false
+Received request : {"number":61069859,"method":"isPrime"}
+37929113 is prime : true
+Received request : {"method":"isPrime","number":69837780}
+69837780 is prime : false
+Received request : {"number":67185341,"method":"isPrime"}
+48523667 is prime : true
+Received request : {"method":"isPrime","number":19813919}
+61306951 is prime : true
+Received request : {"method":"isPrime","number":56104024}
+56104024 is prime : false
+Received request : {"method":"isPrime","number":24073523}
+19813919 is prime : true
+Received request : {"number":82282302,"method":"isPrime"}
+82282302 is prime : false
+Received request : {"method":"isPrime","number":26023471}
+26023471 is prime : false
+Received request : {"method":"isPrime","number":55586011}
+55586011 is prime : false
+Received request : {"number":93462637,"method":"isPrime"}
+24073523 is prime : true
+Received request : {"method":"isPrime","number":7384019}
+7384019 is prime : true
+Received request : {"method":"isPrime","number":49668007}
+49668007 is prime : false
+Received request : {"method":"isPrime","number":42379081}
+61069859 is prime : true
+Received request : {"method":"isPrime","number":43249351}
+67185341 is prime : true
+Received request : {"number":92935627,"method":"isPrime"}
+93066221 is prime : true
+Received request : {"method":"isPrime","number":73764349}
+42379081 is prime : true
+Received request : {"number":10577045,"method":"isPrime"}
+10577045 is prime : false
+Received request : rime","number":50584811}
+Received request : {"method":"isPrime","number":44595953}
+43249351 is prime : true
+Received request : {"number":991012,"method":"isPrime"}
+991012 is prime : false
+Received request : {"method":"isPrime","number":83538293}
+83538293 is prime : false
+Received request : {"number":14315479,"method":"isPrime"}
+14315479 is prime : false
+Received request : {"number":94675166,"method":"isPrime"}
+94675166 is prime : false
+Received request : me","number":20783254}
+Received request : {"number":84058903,"method":"isPrime"}
+93462637 is prime : true
+Received request : {"method":"isPrime","number":60699827}
+44595953 is prime : true
+Received request : {"method":"isPrime","number":78586213}
+73764349 is prime : true
+Received request : {"method":"isPrime","number":27057372}
+27057372 is prime : false
+Received request : {"method":"isPrime","number":76383887}
+92935627 is prime : true
+Received request : {"number":79102379,"method":"isPrime"}
+60699827 is prime : true
+Received request : {"method":"isPrime","number":1435844}
+1435844 is prime : false
+Received request : {"method":"isPrime","number":28135669}
+28135669 is prime : false
+Received request : {"method":"isPrime","number":71279167}
+84058903 is prime : true
+Received request : {"method":"isPrime","number":17580911}
+17580911 is prime : true
+Received request : {"number":88359092,"method":"isPrime"}
+88359092 is prime : false
+Received request : {"method":"isPrime","number":80610713}
+78586213 is prime : true
+Received request : {"method":"isPrime","number":12047252}
+12047252 is prime : false
+Received request : {"method":"isPrime","number":44174681}
+76383887 is prime : true
+Received request : {"number":74857951,"method":"isPrime"}
+74857951 is prime : false
+Received request : {"number":85811392,"method":"isPrime"}
+85811392 is prime : false
+Received request : {"method":"isPrime","number":28923072}
+28923072 is prime : false
+Received request : {"method":"isPrime","number":60075401}
+79102379 is prime : true
+Received request : {"number":5649619,"method":"isPrime"}
+5649619 is prime : true
+Received request : {"number":42740840,"method":"isPrime"}
+42740840 is prime : false
+Received request : {"method":"isPrime","number":52518883}
+52518883 is prime : false
+Received request : {"number":99583523,"method":"isPrime"}
+99583523 is prime : false
+Received request : {"method":"isPrime","number":93867547}
+71279167 is prime : true
+Received request : {"method":"isPrime","number":74665573}
+74665573 is prime : false
+Received request : {"method":"isPrime","number":19121071}
+44174681 is prime : true
+Received request : {"method":"isPrime","number":80720465}
+80720465 is prime : false
+Received request : {"number":90257017,"method":"isPrime"}
+19121071 is prime : true
+Received request : {"number":95157972,"method":"isPrime"}
+95157972 is prime : false
+Received request : {"method":"isPrime","number":5333173}
+5333173 is prime : true
+Received request : {"method":"isPrime","number":57854627}
+80610713 is prime : true
+Received request : {"method":"isPrime","number":8128347}
+8128347 is prime : false
+Received request : {"method":"isPrime","number":89345231}
+89345231 is prime : false
+Received request : {"number":63373367,"method":"isPrime"}
+60075401 is prime : true
+Received request : {"number":95330596,"method":"isPrime"}
+95330596 is prime : false
+Received request : {"number":4958761,"method":"isPrime"}
+4958761 is prime : true
+Received request : {"number":73658961,"method":"isPrime"}
+73658961 is prime : false
+Received request : {"method":"isPrime","number":27483089}
+27483089 is prime : true
+Received request : {"method":"isPrime","number":83132157}
+83132157 is prime : false
+Received request : {"method":"isPrime","number":17569417}
+17569417 is prime : true
+Received request : {"number":64747041,"method":"isPrime"}
+64747041 is prime : false
+Received request : {"number":3966223,"method":"isPrime"}
+57854627 is prime : true
+Received request : 229640,"method":"isPrime"}
+Received request : {"method":"isPrime","number":79285121}
+3966223 is prime : true
+Received request : {"method":"isPrime","number":54251123}
+93867547 is prime : true
+Received request : 205217,"method":"isPrime"}
+Received request : {"method":"isPrime","number":53719751}
+53719751 is prime : false
+Received request : {"number":23383511,"method":"isPrime"}
+63373367 is prime : true
+Received request : {"number":4859419,"method":"isPrime"}
+90257017 is prime : true
+Received request : {"method":"isPrime","number":93784891}
+4859419 is prime : true
+Received request : {"number":3237631,"method":"isPrime"}
+3237631 is prime : true
+Received request : {"method":"isPrime","number":59227320}
+59227320 is prime : false
+Received request : {"number":17765076,"method":"isPrime"}
+17765076 is prime : false
+Received request : {"method":"isPrime","number":48855792}
+48855792 is prime : false
+Received request : {"method":"isPrime","number":88172911}
+23383511 is prime : true
+Received request : {"number":90208021,"method":"isPrime"}
+54251123 is prime : true
+Received request : {"number":65306543,"method":"isPrime"}
+79285121 is prime : true
+Received request : {"number":35157839,"method":"isPrime"}
+88172911 is prime : true
+Received request : {"number":8287171,"method":"isPrime"}
+93784891 is prime : true
+Received request : {"number":19981814,"method":"isPrime"}
+19981814 is prime : false
+Received request : {"method":"isPrime","number":75415057}
+35157839 is prime : true
+Received request : {"method":"isPrime","number":77918371}
+8287171 is prime : true
+Received request : {"method":"isPrime","number":15892937}
+90208021 is prime : true
+Received request : {"number":31414819,"method":"isPrime"}
+65306543 is prime : true
+Received request : {"method":"isPrime","number":46210249}
+15892937 is prime : true
+Received request : {"number":49692426,"method":"isPrime"}
+49692426 is prime : false
+Received request : {"method":"isPrime","number":2391583}
+2391583 is prime : true
+Received request : {"method":"isPrime","number":62616715}
+62616715 is prime : false
+Received request : {"number":79965157,"method":"isPrime"}
+31414819 is prime : true
+Received request : {"method":"isPrime","number":48518666}
+48518666 is prime : false
+Received request : {"number":82854730,"method":"isPrime"}
+82854730 is prime : false
+Received request : {"method":"isPrime","number":77921701}
+77921701 is prime : false
+Received request : {"number":34793782,"method":"isPrime"}
+34793782 is prime : false
+Received request : {"method":"isPrime","number":6459053}
+6459053 is prime : false
+Received request : {"method":"isPrime","number":28556827}
+28556827 is prime : false
+Received request : {"method":"isPrime","number":22066321}
+46210249 is prime : true
+Received request : {"number":27475353,"method":"isPrime"}
+27475353 is prime : false
+Received request : {"number":83086359,"method":"isPrime"}
+83086359 is prime : false
+Received request : {"number":99569233,"method":"isPrime"}
+22066321 is prime : true
+Received request : {"method":"isPrime","number":47983839}
+47983839 is prime : false
+Received request : {"method":"isPrime","number":75889087}
+75415057 is prime : true
+Received request : {"number":70940393,"method":"isPrime"}
+77918371 is prime : true
+Received request : {"number":38827079,"method":"isPrime"}
+79965157 is prime : true

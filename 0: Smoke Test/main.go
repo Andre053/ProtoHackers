@@ -42,14 +42,15 @@ func main() {
 
 	// start workers, they wait until jobs are added
 	for w := 1; w <= NUM_WKRS; w++ {
+		fmt.Println("Started worker", w)
 		go echoWorker(w, jobs)
 	}
 
 	// start tests, simulate sending to workers
-	for c := 1; c <= 30; c++ {
-		time.Sleep(50 * time.Millisecond)
-		go test()
-	}
+	//for c := 1; c <= 30; c++ {
+	//	time.Sleep(50 * time.Millisecond)
+	//	go test()
+	//}
 
 	PORT := ":8123"
 
@@ -61,6 +62,8 @@ func main() {
 	// listen loop
 	for {
 		conn, err := listener.Accept() // accept client connections
+		fmt.Println("### Accepted a connection ###")
+		fmt.Printf("Connection details:\n\tNetwork Address : %v\n", conn.RemoteAddr().String())
 		if err != nil {
 			panic(err)
 		}
@@ -77,30 +80,38 @@ func echoWorker(id int, jobs <-chan net.Conn) {
 
 		// socket closed once data sent
 
-		buf := make([]byte, 1024)
+		// need a bigger buffer -> options include: smaller buf, append to large; ioutil.ReadAll
+		// huge buffer for each read is not optimal...
+		MAX_BUF := 4096
+		buf := make([]byte, MAX_BUF)
 
 		// data read loop, gets stuck if EOF not found
 		for {
-			_, err := conn.Read(buf)
-			if err != nil {
+			var read int
 
-				// time for final echo
+			read, err := conn.Read(buf)
+			if err != nil {
 				if err == io.EOF {
-					_, err = conn.Write(buf) // how does EOF work?
-					fmt.Println("Worker", id, "worked")
+					fmt.Println("EOF reached, closing connection")
 					break
 				}
 				panic(err)
 			}
-			_, err = conn.Write(buf) // echo the data
-			if err != nil {
-				panic(err)
-			}
-
+			writeToConn(conn, buf, read)
 		}
 		conn.Close()
 
 	}
+}
+
+func writeToConn(c net.Conn, b []byte, read int) error {
+	b = b[0:read] // likely faster than trim?
+	fmt.Printf("Writing %v bytes to conn\n", read)
+	_, err := c.Write(b)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // simulates sending data to the server
