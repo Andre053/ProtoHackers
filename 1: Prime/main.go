@@ -1,70 +1,28 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"math"
+	"math/big"
 	"net"
 )
 
-/*
-	Accept TCP connections
-	Data from connection separated by new line
-	Respond to connection until malformed response sent
-	Messages are in JSON format
-	Req malformed if not well-formed JSON, required field missing, method name not "isPrime" or number not number
-	Res malformed if not well-formed JSON, required field missing, method name not "isPrime" or prime not bool
-
-	Messages
-	- Proper req: {"method": "isPrime", "number": <num>}
-	- Proper res: {"method": "isPrime", "prime": "<bool>"}
-
-
-	Need a worker pool
-	Need a job channel
-
-
-*/
-
-type Request struct {
-	Method *string `json:"method"`
-	Number *int64  `json:"number"`
-}
-
-type RequestFloat struct {
-	Method *string  `json:"method"`
-	Number *float64 `json:"number"`
-}
-
-type Response struct {
-	Method string `json:"method"`
-	Prime  bool   `json:"prime"`
-}
-
-type MalformedResponse struct {
-	Method string `json:"malformed!"`
-}
-
 func main() {
+	run()
+}
+
+func run() {
 	const MAX_JOBS = 8
 	const NUM_WKRS = 8
 
-	// channel to deliver the connection to the go routine
 	jobs := make(chan net.Conn, MAX_JOBS)
 
-	// start workers, they wait until jobs are added
 	for w := 1; w <= NUM_WKRS; w++ {
-		fmt.Println("Worker started", w)
 		go worker(w, jobs)
 	}
-
-	// start tests, simulate sending to workers
-	//for c := 1; c <= 5; c++ {
-	//	time.Sleep(1000 * time.Millisecond)
-	//	go test(c)
-	//}
 
 	PORT := ":8123"
 
@@ -72,218 +30,173 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	// listen loop
+	fmt.Println("Starting to listen...")
 	for {
-		conn, err := listener.Accept() // accept client connections
-		fmt.Println("### Accepted a connection ###")
-		fmt.Printf("Connection details:\n\tNetwork Address : %v\n", conn.RemoteAddr().String())
+		conn, err := listener.Accept()
 		if err != nil {
 			panic(err)
 		}
-		jobs <- conn // send the connection to be worked
+		fmt.Println("### Accepted a connection")
 
+		jobs <- conn // send connection to be worked
 	}
-}
-
-// simulates sending data to the server
-/*func test(num int64) {
-	time.Sleep(2 * time.Second)
-	conn, err := net.Dial("tcp", ":8123")
-	defer conn.Close()
-	if err != nil {
-		panic(err)
-	}
-	req := &Request{
-		Method: "isPrime",
-		Number: num,
-	}
-	data, err := json.Marshal(req)
-	if err != nil {
-		panic(err)
-	}
-	_, err = conn.Write(data)
-	if err != nil {
-		panic(err)
-	}
-
-	buf := make([]byte, 1024)
-	_, err = conn.Read(buf)
-	if err != nil {
-		if err == io.EOF {
-			fmt.Println("EOF client")
-		}
-		panic(err)
-	}
-	//fmt.Println("Received", string(buf))
-}*/
-
-func checkPrime(p int64) (bool, error) {
-	var i int64
-	if p <= 1 {
-		return false, nil
-	}
-
-	// might need to optimize
-	for i = 2; i <= int64(math.Floor(float64(p)/2)); i++ {
-		if p%i == 0 { // no remainder
-			return false, nil
-		}
-	}
-	return true, nil
-
 }
 
 func worker(id int, jobs <-chan net.Conn) {
-	// loop removes from the jobs channel
-	// will run whenever there is something in the channel
-	// runs/blocks until channel is closed
-
-	sep := []byte("\n") // ASCII 10
+	sep := []byte("\n")
 
 	for conn := range jobs {
-		fmt.Printf(">Session started on worker %v<\n", id)
-		MAX_BUF := 200000
-		buf := make([]byte, MAX_BUF)
+		defer conn.Close()
+		handleConn(conn, sep, id)
+		fmt.Printf("Connection handled by %v\n", id)
+	}
+}
 
-		for {
-			read, err := conn.Read(buf)
-			if err != nil {
-				if err == io.EOF {
-					fmt.Println("Disconnect client due to EOF reached")
-					break
-				}
+func handleConn(conn net.Conn, sep []byte, id int) {
+	count := 1
+
+	scanner := bufio.NewScanner(conn)
+
+	// loop to read the connection data
+	for {
+
+		// only need a single scan
+		scanner.Scan()
+		reqStr := scanner.Text()
+
+		err := scanner.Err()
+		if err != nil {
+			if err != io.EOF {
 				panic(err)
 			}
-			if read == MAX_BUF {
-				// there could be a started entry that is finished in next read
-				// find a way to parse out the entry, or make huge buffer
-				fmt.Println("Filled buffer")
-			}
-
-			bufTrimmed := bytes.Trim(buf, "\x00")
-
-			reqsTooLong := bytes.Split(bufTrimmed, sep)
-			reqs := reqsTooLong[:len(reqsTooLong)-1] // remove last entry
-
-			// first check for malformed
-			r := reqs[0]
-			fmt.Printf("Request: %v", string(r))
-			req := &Request{}
-			err = json.Unmarshal(r, req)
-			if err != nil { // must be malformed, kill it
-
-				reqFloat := &RequestFloat{}
-				err = json.Unmarshal(r, reqFloat)
-				if err == nil {
-					fmt.Printf(" is float\n")
-					res := createRes(false)
-					err = sendJson(conn, res)
-					if err != nil {
-						panic(err)
-					}
-					break
-
-				}
-				fmt.Printf(" is malformed\n")
-				res := createMalformed()
-				err = sendJson(conn, res)
-				if err != nil {
-					panic(err)
-				}
-
-				break
-
-			}
-			if req.Method == nil || req.Number == nil || *req.Method != "isPrime" {
-				fmt.Printf(" is malformed\n")
-				res := createMalformed()
-				err = sendJson(conn, res)
-				if err != nil {
-					panic(err)
-				}
-				break
-			}
-			num := req.Number
-			isPrime, err := checkPrime(*num)
-			if err != nil {
-				// send malformed request
-				fmt.Printf(" is malformed\n")
-			}
-			//fmt.Printf("Valid isPrime result: %v\n", isPrime)
-			// send response with result
-			res := createRes(isPrime)
-			err = sendJson(conn, res)
-			if err != nil {
-				panic(err)
-			}
-			fmt.Printf(" is valid\n")
-			// check remaining entries
-			for _, r := range reqs[1:] {
-				fmt.Println("request:", string(r))
-				req := &Request{}
-				err = json.Unmarshal(r, req)
-				if err != nil { // must be a syntax error, continue
-
-					continue
-				}
-				// no error parsing, so request is valid
-				num := req.Number
-				isPrime, err := checkPrime(*num)
-				if err != nil {
-					// send malformed request
-				}
-				//fmt.Printf("Valid isPrime result: %v\n", isPrime)
-				// send response with result
-				res := createRes(isPrime)
-				err = sendJson(conn, res)
-				if err != nil {
-					panic(err)
-				}
-				//fmt.Printf("Request %v handled\n\n", string(r))
-
-			}
-			//fmt.Printf("Completed all requests in buffer\n\n")
 		}
-		fmt.Println(">Closing connection<")
-		conn.Close()
+
+		req := []byte(reqStr)
+		// have data, check if valid request
+		request, valid := isValid(req)
+		if !valid {
+			// handle invalid request
+			fmt.Printf("\nScanned:\t%v\nData received:\t%v\nMalformed...\nWorker %v count:\t%v\n", reqStr, string(req), id, count)
+			sendMalformed(conn)
+			count += 1
+			break // once malformed is seen, stop processing conn
+		}
+
+		isPrime := checkNumber(*request)
+
+		res := createRes(isPrime)
+		fmt.Printf("\nScanned:\t%v\nData received:\t%v\n%v prime?\t%v\nWorker %v count:\t%v\n", reqStr, string(req), big.NewFloat(request.NumberByte).String(), isPrime, id, count)
+		err = sendJson(conn, res)
+		if err != nil {
+			panic(err)
+		}
+		count += 1
 
 	}
+	fmt.Printf("Total requests for worker %v:\t%v\n", id, count-1)
 }
 
-func sendJson(c net.Conn, r any) error {
-	jsonRes, err := json.Marshal(r)
-	if err != nil {
-		return err
+// much too slow it seems
+// should be able to handle any size number, but float64 and uint64 seem to be sufficient for this exercise
+func checkPrimeSlow(num *big.Int) bool {
+
+	limit := new(big.Int)
+	idx := big.NewInt(1)
+	remainder := new(big.Int)
+
+	if num.Cmp(big.NewInt(2)) == 0 || num.Cmp(big.NewInt(3)) == 0 {
+		//fmt.Printf("Yes, by base case 2 or 3\n")
+		return true
 	}
-	//fmt.Println("Sending JSON:", string(jsonRes))
-	jsonRes = append(jsonRes, byte('\n')) // each res must be terminated by a newline
-	err = sendToConn(c, jsonRes)
-	if err != nil {
-		return err
+
+	if num.Cmp(big.NewInt(1)) != 1 {
+		//fmt.Printf("No, by base case <=1\n")
+
+		return false
 	}
-	return nil
+
+	limit.Div(num, big.NewInt(2))
+	limit.Add(limit, big.NewInt(1))
+
+	for idx = big.NewInt(2); idx.Cmp(limit) != 0; idx.Add(idx, big.NewInt(1)) {
+		remainder.Mod(num, idx)
+		if remainder.Cmp(big.NewInt(0)) == 0 {
+			//fmt.Printf("No, %v is a factor\n", idx)
+			return false
+		}
+	}
+
+	//fmt.Printf("Yes, by brute force\n")
+	return true
 }
 
-func createMalformed() Response {
-	res := Response{
-		Method: "error",
+func checkNumber(req Request) bool {
+	//numString := string(req.NumberByte)
+	//numFloat := new(big.Float).SetPrec(uint(len(numString)))
+	//numFloat.SetString(numString)
+
+	// smaller num route
+	// have a float64
+	if req.NumberByte != float64(int(req.NumberByte)) && req.NumberByte < 0 {
+		return false
 	}
-	return res
+	numUint64 := uint64(req.NumberByte)
+	return checkPrimeFast(numUint64)
+	/*
+
+		// big num route
+		numFloat := big.NewFloat(req.NumberByte)
+
+		num := new(big.Int)
+		num, accuracy := numFloat.Int(num)
+		if accuracy != 0 {
+			// not an integer
+			return false
+		}
+
+		return checkPrimeSlow(num)
+	*/
+
 }
 
-func createRes(isPrime bool) Response {
-	res := Response{
-		Method: "isPrime",
-		Prime:  isPrime,
+func checkPrimeFast(num uint64) bool {
+	if num == 0 || num == 1 {
+		return false
 	}
-	return res
+	if num == 2 {
+		return true
+	}
+
+	for i := uint64(2); i < num/2+1; i++ {
+		if num%i == 0 {
+			return false
+		}
+
+	}
+	return true
 }
 
-func sendToConn(c net.Conn, data []byte) error {
-	_, err := c.Write(data)
-	if err != nil {
-		return err
+func isValid(reqData []byte) (*Request, bool) {
+
+	req := &Request{}
+	err := json.Unmarshal(reqData, req)
+	if err != nil { // does not fit
+		return nil, false
 	}
-	return nil
+
+	// there may be faster checks
+	if req.Method != "isPrime" || !bytes.Contains(reqData, []byte("number")) {
+		return nil, false
+	}
+	return req, true
+}
+
+func extractRequests(data []byte, sep []byte) [][]byte {
+	// trim all zeros
+	bufTrimmed := bytes.Trim(data, "\x00")
+
+	// split data into a list of requests
+	reqs := bytes.Split(bufTrimmed, sep)
+
+	return reqs[:len(reqs)-1]
 }
